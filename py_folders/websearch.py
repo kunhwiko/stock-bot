@@ -11,9 +11,9 @@ class WebSearch():
         self.count = count 
 
     def web_parse(self):
-        # retrieve website to parses 
-        url = requests.get(self.website)
-        html = urllib.request.urlopen(url).read()
+        # retrieve website to parse
+        html = urllib.request.urlopen(self.website).read()
         soup = BeautifulSoup(html,"html.parser")
+
 
         

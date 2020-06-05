@@ -30,7 +30,24 @@ class WebSearch():
             for ch in stock.find_all('td',attrs = {'aria-label':'Change'}):
                 changes.append(ch.text)
 
+        # create a hash map mapping symbol to changes
+        symbol_to_change = {}
+        for i in range(len(symbol)):
+            symbol_to_change[symbol[i]] = changes[i]
 
+        # find 'count' number of symbols with the highest changes 
+        res = [sym for sym in sorted(symbol_to_change.keys(),key=symbol_to_change.get,reverse=True)]
+        print(res)
+
+
+
+
+
+
+
+        
+
+        
                 
 
 

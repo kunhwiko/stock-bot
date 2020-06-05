@@ -1,3 +1,4 @@
+import sys
 import requests
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
@@ -14,7 +15,7 @@ class WebSearch():
     def web_parse(self):
         # make sure to retrieve at max 5 stocks
         if self.count > 5:
-            return
+            sys.exit()
         
         symbol, changes = [], []
 
@@ -30,13 +31,17 @@ class WebSearch():
                     symbol.append(sym.text)
                 for ch in stock.find_all('td',attrs = {'aria-label':'Change'}):
                     changes.append(float(ch.text[1:]))
+        
+        return symbol, changes
 
+    # find 'count' number of symbols with the highest changes 
+    def map_symbols(self, symbol, changes):
         # create a hash map mapping symbol to changes
         symbol_to_change = {}
         for i in range(len(symbol)):
             symbol_to_change[symbol[i]] = changes[i]
 
-        # find 'count' number of symbols with the highest changes 
+        # sort symbols by highest changes  
         res = [sym for sym in sorted(symbol_to_change.keys(),key=symbol_to_change.get,reverse=True)]
         return res[:self.count]
     

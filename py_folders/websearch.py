@@ -15,20 +15,21 @@ class WebSearch():
         # make sure to retrieve at max 5 stocks
         if self.count > 5:
             return
+        
+        symbol, changes = [], []
 
-        # retrieve website to parse
-        html = urllib.request.urlopen(self.website).read()
-        soup = BeautifulSoup(html,"html.parser")
+        # retrieve website to parse (approx 1000 stock data)
+        for i in range(9):
+            offset = 100 * i
+            html = urllib.request.urlopen(self.website + "&offset=" + str(offset)).read()
+            soup = BeautifulSoup(html,"html.parser")
 
-        # retrieve company symbols and their daily change in stock
-        symbol = []
-        changes = []
-
-        for stock in soup.find_all('tr',attrs = {'class':'simpTblRow'}):
-            for sym in stock.find_all('td',attrs = {'aria-label':'Symbol'}):
-                symbol.append(sym.text)
-            for ch in stock.find_all('td',attrs = {'aria-label':'Change'}):
-                changes.append(ch.text)
+            # retrieve company symbols and their daily change in stock
+            for stock in soup.find_all('tr',attrs = {'class':'simpTblRow'}):
+                for sym in stock.find_all('td',attrs = {'aria-label':'Symbol'}):
+                    symbol.append(sym.text)
+                for ch in stock.find_all('td',attrs = {'aria-label':'Change'}):
+                    changes.append(float(ch.text[1:]))
 
         # create a hash map mapping symbol to changes
         symbol_to_change = {}
@@ -37,19 +38,5 @@ class WebSearch():
 
         # find 'count' number of symbols with the highest changes 
         res = [sym for sym in sorted(symbol_to_change.keys(),key=symbol_to_change.get,reverse=True)]
-        print(res)
-
-
-
-
-
-
-
-        
-
-        
-                
-
-
-
-        
+        return res[:self.count]
+    

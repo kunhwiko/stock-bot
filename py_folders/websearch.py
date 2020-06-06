@@ -30,7 +30,7 @@ class WebSearch():
                 for sym in stock.find_all('td',attrs = {'aria-label':'Symbol'}):
                     symbol.append(sym.text)
                 for ch in stock.find_all('td',attrs = {'aria-label':'Change'}):
-                    changes.append(float(ch.text[1:]))
+                    changes.append(ch.text)
         
         return symbol, changes
 

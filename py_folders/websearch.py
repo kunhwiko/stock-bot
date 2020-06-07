@@ -1,7 +1,9 @@
 import sys
 import requests
+from pprint import pprint 
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
+from alpha_vantage.timeseries import TimeSeries
 
 class WebSearch():
 
@@ -30,7 +32,7 @@ class WebSearch():
                 for sym in stock.find_all('td',attrs = {'aria-label':'Symbol'}):
                     symbol.append(sym.text)
                 for ch in stock.find_all('td',attrs = {'aria-label':'Change'}):
-                    changes.append(ch.text)
+                    changes.append(float(ch.text))
         
         return symbol, changes
 
@@ -44,4 +46,9 @@ class WebSearch():
         # sort symbols by highest changes  
         res = [sym for sym in sorted(symbol_to_change.keys(),key=symbol_to_change.get,reverse=True)]
         return res[:self.count]
+
+    def api_call(self,symbol,apikey):
+        ts = TimeSeries(key='LO366YP95G58CFGT',output_format = 'pandas')
+        data, meta_data = ts.get_intraday('AAPL', interval = '1min', outputsize = 'full')
+
     

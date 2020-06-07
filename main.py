@@ -1,4 +1,4 @@
-from py_folders.websearch import WebSearch
+from py_folder.websearch import WebSearch
 
 def main():
     ws = WebSearch("https://finance.yahoo.com/gainers?count=100",5)

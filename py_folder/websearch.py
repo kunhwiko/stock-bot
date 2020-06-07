@@ -1,6 +1,6 @@
 import sys
 import requests
-from pprint import pprint 
+import pandas as pd 
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 from alpha_vantage.timeseries import TimeSeries
@@ -36,6 +36,7 @@ class WebSearch():
         
         return symbol, changes
 
+
     # find 'count' number of symbols with the highest changes 
     def map_symbols(self, symbol, changes):
         # create a hash map mapping symbol to changes
@@ -47,8 +48,12 @@ class WebSearch():
         res = [sym for sym in sorted(symbol_to_change.keys(),key=symbol_to_change.get,reverse=True)]
         return res[:self.count]
 
+
     def api_call(self,symbol,apikey):
-        ts = TimeSeries(key='LO366YP95G58CFGT',output_format = 'pandas')
+        ts = TimeSeries(key='LO366YP95G58CFGT')
         data, meta_data = ts.get_intraday('AAPL', interval = '1min', outputsize = 'full')
+        data = pd.Series(data)
+        print(data.iloc[-1])
+        print(data.keys()[-1])
 
     

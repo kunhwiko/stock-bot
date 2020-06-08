@@ -39,12 +39,12 @@ class WebSearch():
             symbol_to_change[symbol[i]] = changes[i]
 
         # sort symbols by highest changes  
-        res = [sym for sym in sorted(symbol_to_change.keys(),key=symbol_to_change.get,reverse=True)]
-        return res[:self.count]
+        sorted_syms = [sym for sym in sorted(symbol_to_change.keys(),key=symbol_to_change.get,reverse=True)]
+        return sorted_syms[:5]
 
 
     def api_call(self,symbol,apikey):
-        ts = TimeSeries(key='LO366YP95G58CFGT')
+        ts = TimeSeries(key=apikey)
         data, meta_data = ts.get_intraday('AAPL', interval = '1min', outputsize = 'full')
 
         # Consider using JSON file

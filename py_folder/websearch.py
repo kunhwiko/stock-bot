@@ -7,18 +7,12 @@ from alpha_vantage.timeseries import TimeSeries
 
 class WebSearch():
 
-    def __init__(self, website, count):
+    def __init__(self, website):
         # website represents the site to scrape
-        # count represents the number of companies to retrieve 
         self.website = website 
-        self.count = count 
 
-    # parse website to search up to 5 stocks 
-    def web_parse(self):
-        # make sure to retrieve at max 5 stocks
-        if self.count > 5:
-            sys.exit()
-        
+    # parse website to search 5 stocks 
+    def web_parse(self):       
         symbol, changes = [], []
 
         # retrieve website to parse (approx 1000 stock data)
@@ -52,6 +46,8 @@ class WebSearch():
     def api_call(self,symbol,apikey):
         ts = TimeSeries(key='LO366YP95G58CFGT')
         data, meta_data = ts.get_intraday('AAPL', interval = '1min', outputsize = 'full')
+
+        # Consider using JSON file
         data = pd.Series(data)
         print(data.iloc[-1])
         print(data.keys()[-1])

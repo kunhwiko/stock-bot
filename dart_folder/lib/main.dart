@@ -11,89 +11,57 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  String name = "";
+  List<String> stocks = [
+    "Stock 1",
+    "Stock 2",
+    "Stock 3"
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor : Colors.grey[900],
-      appBar : AppBar(
-        title : Text('Stock Bot'),
-        centerTitle : true,
-        backgroundColor : Colors.grey[850],
-        elevation : 0.0,
-      ),
-
-      floatingActionButton : FloatingActionButton(
-        onPressed:(){
-          setState(() {
-            name = "Kun Hwi Ko";
-          });
-        },
-      ),
-
-      body : Padding(
-        padding : EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
-        child : Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children : <Widget>[
-            Text(
-              'NAME',
-              style : TextStyle(
-                color : Colors.grey,
-                letterSpacing: 2.0,
+    return MaterialApp(
+      color: Colors.yellow,
+      home: DefaultTabController(
+        length: 4,
+        child: new Scaffold(
+          body: TabBarView(
+            children: [
+              new Container(
+                color: Colors.yellow,
               ),
-            ),
-            SizedBox(height : 10.0),
-            Text(
-              '$name',
-              style : TextStyle(
-                color : Colors.amberAccent[200],
-                letterSpacing : 2.0,
-                fontSize : 20.0,
-                fontWeight : FontWeight.bold,
+              new Container(
+                color: Colors.orange,
               ),
-            ),
-            SizedBox(height : 30.0),
-            Text(
-              'School',
-              style : TextStyle(
-                color : Colors.grey,
-                letterSpacing: 2.0,
+              new Container(
+                color: Colors.lightGreen,
               ),
-            ),
-            SizedBox(height : 10.0),
-            Text(
-              'University of Pennsylvania',
-              style : TextStyle(
-                color : Colors.amberAccent[200],
-                letterSpacing : 2.0,
-                fontSize : 20.0,
-                fontWeight : FontWeight.bold,
+              new Container(
+                color: Colors.red,
               ),
-            ),
-            SizedBox(height : 30.0),
-            Row(
-              children : <Widget>[
-                Icon(
-                  Icons.email,
-                  color : Colors.grey[400],
-                ),
-                SizedBox(width:10.0),
-                Text(
-                  'kunko@seas.upenn.edu',
-                  style : TextStyle(
-                    color : Colors.grey[400],
-                    fontSize : 10.0,
-                    letterSpacing : 1.0,
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
+          bottomNavigationBar: new TabBar(
+            tabs: [
+              Tab(
+                icon: new Icon(Icons.home),
+              ),
+              Tab(
+                icon: new Icon(Icons.rss_feed),
+              ),
+              Tab(
+                icon: new Icon(Icons.perm_identity),
+              ),
+              Tab(icon: new Icon(Icons.settings),)
+            ],
+            labelColor: Colors.yellow,
+            unselectedLabelColor: Colors.blue,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorPadding: EdgeInsets.all(5.0),
+            indicatorColor: Colors.red,
+          ),
+          backgroundColor: Colors.black,
         ),
       ),
     );
   }
 }
-

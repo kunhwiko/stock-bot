@@ -10,14 +10,10 @@ def main():
     while True :
         for i in range(len(sorted_syms)):
             json_file = ws.api_call(sorted_syms[i],'LO366YP95G58CFGT')
-            with open("/dart_folder/assets/data" + str(i+1) + ".txt",'w') as output:
+            with open("./dart_folder/assets/data" + str(i+1) + ".txt",'w') as output:
                 json.dump(json_file,output)
         # retrieves new data every 1 min 
         time.sleep(60)
     
-        
-
-
-
 if __name__ == "__main__":
     main()

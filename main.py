@@ -8,11 +8,10 @@ def main():
     sorted_syms = ws.map_symbols(sym,changes)
     
     while True :
-        for stock in sorted_syms:
-            json_file = ws.api_call(stock,'LO366YP95G58CFGT')
-            with open('data.txt','w') as output:
+        for i in range(len(sorted_syms)):
+            json_file = ws.api_call(sorted_syms[i],'LO366YP95G58CFGT')
+            with open("/dart_folder/assets/data" + str(i+1) + ".txt",'w') as output:
                 json.dump(json_file,output)
-
         # retrieves new data every 1 min 
         time.sleep(60)
     

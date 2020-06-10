@@ -45,11 +45,8 @@ class WebSearch():
 
     def api_call(self,symbol,apikey):
         ts = TimeSeries(key=apikey)
-        data, meta_data = ts.get_intraday('AAPL', interval = '1min', outputsize = 'full')
+        data, meta_data = ts.get_intraday(symbol, interval = '1min', outputsize = 'full')
 
-        # Consider using JSON file
-        data = pd.Series(data)
-        print(data.iloc[-1])
-        print(data.keys()[-1])
+        return data 
 
     

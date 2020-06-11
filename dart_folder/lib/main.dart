@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'parseJson.dart';
 import 'package:charts_flutter/flutter.dart';
 
 void main(){
@@ -22,6 +21,9 @@ class _HomeState extends State<Home> {
           body: TabBarView(
             children: [
               new Container(
+                child : Image(
+                  image : AssetImage('assets/image1.png'),
+                ),
                 color: Colors.red[300],
               ),
               new Container(

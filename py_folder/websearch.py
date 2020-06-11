@@ -82,13 +82,13 @@ class WebSearch():
         color = ['darkred','darkorange','limegreen','royalblue','darkviolet']
         background = ['mistyrose','navajowhite','honeydew','paleturquoise','lavender']
 
-        fig, ax = plt.subplots(figsize=(16,9))
+        fig, ax = plt.subplots(figsize=(12,12))
         plt.plot(x_axis,y_axis,color=color[type],linewidth=0.7)
         plt.fill_between(x_axis,y_axis,color=background[type])
 
         plt.xlabel('Time')
         plt.xticks(rotation=45)
-        loc = plticker.MultipleLocator(base=len(x_axis)//5)
+        loc = plticker.MultipleLocator(base=200)
         ax.xaxis.set_major_locator(loc)
         x_ticks = np.append(ax.get_xticks(),len(x_axis)-1)
         ax.set_xticks(x_ticks)
@@ -100,7 +100,3 @@ class WebSearch():
 
         plt.savefig(path)
         plt.close()
-        
-
-
-

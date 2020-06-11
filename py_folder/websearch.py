@@ -2,6 +2,7 @@ import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 from alpha_vantage.timeseries import TimeSeries
 from matplotlib import pyplot as plt 
+from matplotlib import ticker as plticker 
 
 class WebSearch():
 
@@ -71,22 +72,24 @@ class WebSearch():
         for i in range(len(records)):
             if count == 1000:
                 break
-            x_axis.append(records[i][0])
+            x_axis.append(records[i][0][5:16])
             y_axis.append(float(records[i][1]))
             count += 1
         
         color = ['darkred','darkorange','limegreen','royalblue','darkviolet']
         background = ['mistyrose','navajowhite','honeydew','paleturquoise','lavender']
 
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(16,9))
         plt.plot(x_axis,y_axis,color=color[type],linewidth=0.7)
         plt.fill_between(x_axis,y_axis,color=background[type])
 
         plt.xlabel('Time')
-        plt.xticks([])
+        plt.xticks(rotation=45)
+        loc = plticker.MultipleLocator(base=len(x_axis)//5)
+        ax.xaxis.set_major_locator(loc)
         plt.ylabel('Price ($)')
         plt.grid(True)
-        plt.ylim(min(y_axis)-5,max(y_axis)+5)
+        plt.ylim(min(y_axis)-2,max(y_axis)+2)
 
         plt.savefig(path)
         plt.close()

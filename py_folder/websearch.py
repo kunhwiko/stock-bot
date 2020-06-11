@@ -94,7 +94,6 @@ class WebSearch():
         ax.set_xticks(x_ticks)
         plt.xlim(x_axis[0],x_axis[-1])
 
-
         plt.ylabel('Price ($)')
         plt.grid(True)
         plt.ylim(min(y_axis)-2,max(y_axis)+2)

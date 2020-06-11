@@ -1,7 +1,7 @@
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 from alpha_vantage.timeseries import TimeSeries
-import pandas as pd 
+from matplotlib import pyplot as plt 
 
 class WebSearch():
 
@@ -65,9 +65,20 @@ class WebSearch():
     def plot(self,records,path):
         x_axis = []
         y_axis = []
+
+        # limit to 500 data points 
+        count = 0
         for i in range(len(records)):
+            if count == 500:
+                break
             x_axis.append(records[i][0])
-            y_axis.append(records[i][1])
-        df = pd.DataFrame(y_axis,x_axis)
-        print(df)
+            y_axis.append(float(records[i][1]))
+            count += 1
+
+        plt.plot(x_axis,y_axis,color="red",linewidth=0.8)
+        plt.savefig(path)
+        plt.close()
+        
+
+
 

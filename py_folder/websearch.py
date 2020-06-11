@@ -8,6 +8,7 @@ class WebSearch():
         # website represents the site to scrape
         self.website = website 
 
+
     # parse website to search 5 stocks 
     def web_parse(self):       
         symbol, changes = [], []
@@ -40,10 +41,10 @@ class WebSearch():
         return sorted_syms[:5]
 
 
+    # call the API of a certain stock, and return a JSON file 
     def api_call(self,symbol,apikey):
         ts = TimeSeries(key=apikey)
         data, meta_data = ts.get_intraday(symbol, interval = '1min', outputsize = 'full')
-
-        return data 
+        return data
 
     

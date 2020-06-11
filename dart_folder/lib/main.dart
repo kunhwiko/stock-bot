@@ -3,7 +3,6 @@ import 'parseJson.dart';
 import 'package:charts_flutter/flutter.dart';
 
 void main(){
-  parseJson();
   return runApp(Home());
 }
 

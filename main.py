@@ -9,10 +9,9 @@ def main():
     
     while True :
         for i in range(len(sorted_syms)):
-            json_file = ws.api_call(sorted_syms[i],'LO366YP95G58CFGT')
-            new_json = ws.cleanse_json(json_file)
-            with open("./dart_folder/assets/data" + str(i+1) + ".json",'w') as output:
-                json.dump(new_json,output)            
+            json_extract = ws.api_call(sorted_syms[i],'LO366YP95G58CFGT')
+            data = ws.cleanse_json(json_extract)
+            ws.plot(data, './dart_folder/assets/image' + str(i+1))
         # retrieves new data every 1 min 
         time.sleep(60)
     

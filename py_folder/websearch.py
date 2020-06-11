@@ -1,6 +1,7 @@
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 from alpha_vantage.timeseries import TimeSeries
+import pandas as pd 
 
 class WebSearch():
 
@@ -48,18 +49,25 @@ class WebSearch():
         return data
 
 
-    # cleanse the previous JSON data and create a new JSON object
+    # cleanse the previous JSON data to build the image 
     def cleanse_json(self,json_data):
         new_records = []
         for k,v in json_data.items():
-            # example format of new JSON format
-            # {data : [{time : '2020-06-04 : 09:36:00, 'price' : 220.78}]}
             close_price = v['4. close']
-            new_records.append({'time': k, 'close': close_price})
+            new_records.append((k,close_price))
 
-        new_data = {}
-        new_data['data'] = new_records
-        return new_data 
-
-
+        # format will be in [(time1,price1),(time2,price2)] in time order 
+        new_records.reverse()
+        return new_records
     
+
+    # builds an image based on the cleansed data to specified path  
+    def plot(self,records,path):
+        x_axis = []
+        y_axis = []
+        for i in range(len(records)):
+            x_axis.append(records[i][0])
+            y_axis.append(records[i][1])
+        df = pd.DataFrame(x_axis,y_axis)
+        print(df)
+

@@ -68,6 +68,6 @@ class WebSearch():
         for i in range(len(records)):
             x_axis.append(records[i][0])
             y_axis.append(records[i][1])
-        df = pd.DataFrame(x_axis,y_axis)
+        df = pd.DataFrame(y_axis,x_axis)
         print(df)
 

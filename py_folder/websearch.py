@@ -59,7 +59,6 @@ class WebSearch():
             new_records.append((k,close_price))
 
         # format will be in [(time1,price1),(time2,price2)]
-        new_records
         return new_records
     
 
@@ -82,21 +81,23 @@ class WebSearch():
         color = ['darkred','darkorange','limegreen','royalblue','darkviolet']
         background = ['mistyrose','navajowhite','honeydew','paleturquoise','lavender']
 
-        fig, ax = plt.subplots(figsize=(12,12))
+        fig, ax = plt.subplots(figsize=(16,16))
         plt.plot(x_axis,y_axis,color=color[type],linewidth=0.7)
         plt.fill_between(x_axis,y_axis,color=background[type])
 
-        plt.xlabel('Time')
-        plt.xticks(rotation=45)
-        loc = plticker.MultipleLocator(base=200)
+        ax.set_xlabel('Time',fontsize=30)
+        plt.xticks(rotation=20)
+        loc = plticker.MultipleLocator(base=len(x_axis)//5)
         ax.xaxis.set_major_locator(loc)
         x_ticks = np.append(ax.get_xticks(),len(x_axis)-1)
         ax.set_xticks(x_ticks)
+        ax.tick_params(axis="x",labelsize=20)
         plt.xlim(x_axis[0],x_axis[-1])
 
-        plt.ylabel('Price ($)')
-        plt.grid(True)
-        plt.ylim(min(y_axis)-2,max(y_axis)+2)
+        ax.set_ylabel('Price ($)', fontsize=30)
+        ax.tick_params(axis="y",labelsize=20)
+        plt.ylim(min(y_axis)-3,max(y_axis)+3)
 
+        plt.grid(True)
         plt.savefig(path)
         plt.close()

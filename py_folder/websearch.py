@@ -66,10 +66,10 @@ class WebSearch():
         x_axis = []
         y_axis = []
 
-        # limit to 500 data points 
+        # limit to 1000 data points 
         count = 0
         for i in range(len(records)):
-            if count == 500:
+            if count == 1000:
                 break
             x_axis.append(records[i][0])
             y_axis.append(float(records[i][1]))
@@ -80,6 +80,8 @@ class WebSearch():
 
         plt.plot(x_axis,y_axis,color=color[type],linewidth=0.7)
         plt.fill_between(x_axis,y_axis,color=background[type])
+        plt.xticks([])
+        plt.ylim(min(y_axis)-5,max(y_axis)+5)
         plt.savefig(path)
         plt.close()
         

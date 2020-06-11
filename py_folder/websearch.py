@@ -2,7 +2,8 @@ import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 from alpha_vantage.timeseries import TimeSeries
 from matplotlib import pyplot as plt 
-from matplotlib import ticker as plticker 
+from matplotlib import ticker as plticker
+import numpy as np 
 
 class WebSearch():
 
@@ -47,7 +48,6 @@ class WebSearch():
     def api_call(self,symbol,apikey):
         ts = TimeSeries(key=apikey)
         data, meta_data = ts.get_intraday(symbol, interval = '1min', outputsize = 'full')
-        print(data)
         return data
 
 
@@ -88,8 +88,13 @@ class WebSearch():
 
         plt.xlabel('Time')
         plt.xticks(rotation=45)
-        loc = plticker.MultipleLocator(base=len(x_axis)//5-1)
+        loc = plticker.MultipleLocator(base=len(x_axis)//5)
         ax.xaxis.set_major_locator(loc)
+        x_ticks = np.append(ax.get_xticks(),len(x_axis)-1)
+        ax.set_xticks(x_ticks)
+        plt.xlim(x_axis[0],x_axis[-1])
+
+
         plt.ylabel('Price ($)')
         plt.grid(True)
         plt.ylim(min(y_axis)-2,max(y_axis)+2)

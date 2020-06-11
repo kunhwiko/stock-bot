@@ -47,4 +47,18 @@ class WebSearch():
         data, meta_data = ts.get_intraday(symbol, interval = '1min', outputsize = 'full')
         return data
 
+
+    # cleanse the previous JSON data and create a new JSON object
+    def cleanse_json(self,json_data):
+        new_records = {}
+        count = 1
+        for k,v in json_data.items():
+            # example format of new JSON format
+            # {data1 : {time : '2020-06-04 : 09:36:00, 'price' : 220.78}}
+            close_price = v['4. close']
+            new_records["data" + str(count)] = {'time': k, 'close': close_price}
+            count += 1
+        return new_records 
+
+
     

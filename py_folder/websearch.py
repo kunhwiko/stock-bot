@@ -47,6 +47,7 @@ class WebSearch():
     def api_call(self,symbol,apikey):
         ts = TimeSeries(key=apikey)
         data, meta_data = ts.get_intraday(symbol, interval = '1min', outputsize = 'full')
+        print(data)
         return data
 
 
@@ -57,8 +58,8 @@ class WebSearch():
             close_price = v['4. close']
             new_records.append((k,close_price))
 
-        # format will be in [(time1,price1),(time2,price2)] in time order 
-        new_records.reverse()
+        # format will be in [(time1,price1),(time2,price2)]
+        new_records
         return new_records
     
 
@@ -76,6 +77,8 @@ class WebSearch():
             y_axis.append(float(records[i][1]))
             count += 1
         
+        x_axis.reverse()   # time order from least to most recent 
+        y_axis.reverse()   
         color = ['darkred','darkorange','limegreen','royalblue','darkviolet']
         background = ['mistyrose','navajowhite','honeydew','paleturquoise','lavender']
 
@@ -85,7 +88,7 @@ class WebSearch():
 
         plt.xlabel('Time')
         plt.xticks(rotation=45)
-        loc = plticker.MultipleLocator(base=len(x_axis)//5)
+        loc = plticker.MultipleLocator(base=len(x_axis)//5-1)
         ax.xaxis.set_major_locator(loc)
         plt.ylabel('Price ($)')
         plt.grid(True)

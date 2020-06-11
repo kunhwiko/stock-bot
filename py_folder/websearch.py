@@ -62,7 +62,7 @@ class WebSearch():
     
 
     # builds an image based on the cleansed data to specified path  
-    def plot(self,records,path):
+    def plot(self,records,path,type):
         x_axis = []
         y_axis = []
 
@@ -74,8 +74,12 @@ class WebSearch():
             x_axis.append(records[i][0])
             y_axis.append(float(records[i][1]))
             count += 1
+        
+        color = ['darkred','darkorange','limegreen','royalblue','darkviolet']
+        background = ['mistyrose','navajowhite','honeydew','paleturquoise','lavender']
 
-        plt.plot(x_axis,y_axis,color="red",linewidth=0.8)
+        plt.plot(x_axis,y_axis,color=color[type],linewidth=0.7)
+        plt.fill_between(x_axis,y_axis,color=background[type])
         plt.savefig(path)
         plt.close()
         

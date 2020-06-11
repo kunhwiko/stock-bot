@@ -78,10 +78,16 @@ class WebSearch():
         color = ['darkred','darkorange','limegreen','royalblue','darkviolet']
         background = ['mistyrose','navajowhite','honeydew','paleturquoise','lavender']
 
+        fig, ax = plt.subplots()
         plt.plot(x_axis,y_axis,color=color[type],linewidth=0.7)
         plt.fill_between(x_axis,y_axis,color=background[type])
+
+        plt.xlabel('Time')
         plt.xticks([])
+        plt.ylabel('Price ($)')
+        plt.grid(True)
         plt.ylim(min(y_axis)-5,max(y_axis)+5)
+
         plt.savefig(path)
         plt.close()
         

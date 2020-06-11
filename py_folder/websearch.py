@@ -85,17 +85,17 @@ class WebSearch():
         plt.plot(x_axis,y_axis,color=color[type],linewidth=0.7)
         plt.fill_between(x_axis,y_axis,color=background[type])
 
-        ax.set_xlabel('Time',fontsize=30)
+        ax.set_xlabel('Time',fontsize=35,fontweight="bold")
         plt.xticks(rotation=20)
         loc = plticker.MultipleLocator(base=len(x_axis)//5)
         ax.xaxis.set_major_locator(loc)
         x_ticks = np.append(ax.get_xticks(),len(x_axis)-1)
         ax.set_xticks(x_ticks)
-        ax.tick_params(axis="x",labelsize=20)
+        ax.tick_params(axis="x",labelsize=25)
         plt.xlim(x_axis[0],x_axis[-1])
 
-        ax.set_ylabel('Price ($)', fontsize=30)
-        ax.tick_params(axis="y",labelsize=20)
+        ax.set_ylabel('Price ($)', fontsize=35, fontweight="bold")
+        ax.tick_params(axis="y",labelsize=25)
         plt.ylim(min(y_axis)-3,max(y_axis)+3)
 
         plt.grid(True)

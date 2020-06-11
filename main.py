@@ -8,7 +8,7 @@ def main():
     sorted_syms = ws.map_symbols(sym,changes)
     
     while True :
-        for i in range(len(sorted_syms)-1):
+        for i in range(len(sorted_syms)-3):
             json_extract = ws.api_call(sorted_syms[i],'LO366YP95G58CFGT')
             data = ws.cleanse_json(json_extract)
             ws.plot(data, './dart_folder/assets/image' + str(i+1), i)

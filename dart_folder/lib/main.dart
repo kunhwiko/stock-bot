@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'parseJson.dart';
 import 'package:charts_flutter/flutter.dart';
 
-void main() => runApp(Home());
+void main(){
+  parseJson();
+  return runApp(Home());
+}
 
 class Home extends StatefulWidget {
   @override
@@ -9,13 +13,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  List<String> stocks = [
-    "Stock 1",
-    "Stock 2",
-    "Stock 3"
-  ];
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

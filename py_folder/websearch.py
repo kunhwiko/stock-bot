@@ -82,7 +82,7 @@ class WebSearch():
         background = ['mistyrose','navajowhite','honeydew','paleturquoise','lavender']
 
         fig, ax = plt.subplots(figsize=(16,16))
-        plt.plot(x_axis,y_axis,color=color[type],linewidth=0.7)
+        plt.plot(x_axis,y_axis,color=color[type],linewidth=1.5,linestyle="solid")
         plt.fill_between(x_axis,y_axis,color=background[type])
 
         ax.set_xlabel('Time',fontsize=35,fontweight="bold")

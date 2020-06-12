@@ -14,17 +14,27 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Colors.yellow,
       home: DefaultTabController(
         length: 5,
         child: new Scaffold(
           body: TabBarView(
             children: [
-              new Container(
-                child : Image(
-                  image : AssetImage('assets/image1.png'),
-                ),
-                color: Colors.red[300],
+              new Column(
+                children: [
+                  Row(
+                    children : <Widget>[
+                      Container(
+                        child:
+                      ),
+                    ],
+                  ),
+                  Container(
+                    child : Image(
+                      image : AssetImage('assets/image1.png'),
+                    ),
+                    color : Colors.white,
+                  ),
+                ],
               ),
               new Container(
                 color: Colors.amber[300],
@@ -57,12 +67,12 @@ class _HomeState extends State<Home> {
               Tab(icon: new Icon(Icons.filter_5),)
             ],
             labelColor: Colors.white,
-            unselectedLabelColor: Colors.amber,
+            unselectedLabelColor: Colors.pink[50],
             indicatorSize: TabBarIndicatorSize.label,
             indicatorPadding: EdgeInsets.all(5.0),
             indicatorColor: Colors.amber,
           ),
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.indigo[200],
         ),
       ),
     );

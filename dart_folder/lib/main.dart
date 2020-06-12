@@ -22,9 +22,24 @@ class _HomeState extends State<Home> {
               new Column(
                 children: [
                   Row(
+                    mainAxisAlignment : MainAxisAlignment.center,
                     children : <Widget>[
-                      Container(
-                        child:
+                      Expanded(
+                        child : Container(
+                          padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
+                          child: Text('Stock 1'),
+                          color : Colors.red[200],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children : <Widget>[
+                      Expanded(
+                        child : Container(
+                          padding : EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 10.0),
+                          color : Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -34,10 +49,59 @@ class _HomeState extends State<Home> {
                     ),
                     color : Colors.white,
                   ),
+                  Row(
+                    children : <Widget>[
+                      Expanded(
+                        child : Container(
+                          padding : EdgeInsets.fromLTRB(20.0, 35.0, 20.0, 100.0),
+                          color : Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-              new Container(
-                color: Colors.amber[300],
+              new Column(
+                children: [
+                  Row(
+                    mainAxisAlignment : MainAxisAlignment.center,
+                    children : <Widget>[
+                      Expanded(
+                        child : Container(
+                          padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
+                          child: Text('Stock 2'),
+                          color : Colors.orange[200],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children : <Widget>[
+                      Expanded(
+                        child : Container(
+                          padding : EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 10.0),
+                          color : Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    child : Image(
+                      image : AssetImage('assets/image2.png'),
+                    ),
+                    color : Colors.white,
+                  ),
+                  Row(
+                    children : <Widget>[
+                      Expanded(
+                        child : Container(
+                          padding : EdgeInsets.fromLTRB(20.0, 35.0, 20.0, 100.0),
+                          color : Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               new Container(
                 color: Colors.lightGreen,
@@ -66,13 +130,13 @@ class _HomeState extends State<Home> {
               ),
               Tab(icon: new Icon(Icons.filter_5),)
             ],
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.pink[50],
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey[500],
             indicatorSize: TabBarIndicatorSize.label,
             indicatorPadding: EdgeInsets.all(5.0),
-            indicatorColor: Colors.amber,
+            indicatorColor: Colors.white,
           ),
-          backgroundColor: Colors.indigo[200],
+          backgroundColor: Colors.grey[100],
         ),
       ),
     );

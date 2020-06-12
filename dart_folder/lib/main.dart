@@ -53,7 +53,38 @@ class _HomeState extends State<Home> {
                     children : <Widget>[
                       Expanded(
                         child : Container(
-                          padding : EdgeInsets.fromLTRB(20.0, 35.0, 20.0, 100.0),
+                          padding : EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
+                          color : Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children : <Widget>[
+                      Expanded(
+                        child : Container(
+                          padding : EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          child: Text('    Profit  :  '),
+                          color : Colors.white,
+                        ),
+                      ),
+                      Expanded(
+                        child : Container(
+                          color : Colors.white,
+                          child: IconButton(
+                            onPressed: (){},
+                            icon : Icon(Icons.assessment),
+                            color : Colors.red[200],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children : <Widget>[
+                      Expanded(
+                        child : Container(
+                          padding : EdgeInsets.fromLTRB(20.0, 35.0, 20.0, 30.0),
                           color : Colors.white,
                         ),
                       ),

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -14,11 +12,11 @@ class Stock {
   }
 }
 
-Future<String> getFile(String path) async {
+Future<String> _loadJson(String path) async {
   return await rootBundle.loadString(path);
 }
 
-void buildList(){
-
+Future parseJson(String path) async {
+  String jsonString = await _loadJson(path);
+  return jsonString;
 }
-

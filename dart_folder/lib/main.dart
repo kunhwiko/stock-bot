@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart';
+import 'parseJson.dart';
 
 void main(){
   return runApp(Home());

@@ -81,10 +81,12 @@ class WebSearch():
         color = ['darkred','darkorange','limegreen','royalblue','darkviolet']
         background = ['mistyrose','navajowhite','honeydew','paleturquoise','lavender']
 
+        # plot 
         fig, ax = plt.subplots(figsize=(16,16))
         plt.plot(x_axis,y_axis,color=color[type],linewidth=1.5,linestyle="solid")
         plt.fill_between(x_axis,y_axis,color=background[type])
 
+        # configure x axis 
         ax.set_xlabel('Time',fontsize=35,fontweight="bold")
         plt.xticks(rotation=20)
         loc = plticker.MultipleLocator(base=len(x_axis)//5)
@@ -94,6 +96,7 @@ class WebSearch():
         ax.tick_params(axis="x",labelsize=25)
         plt.xlim(x_axis[0],x_axis[-1])
 
+        # configure y axis 
         ax.set_ylabel('Price ($)', fontsize=35, fontweight="bold")
         ax.tick_params(axis="y",labelsize=25)
         plt.ylim(min(y_axis)-3,max(y_axis)+3)

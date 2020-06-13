@@ -6,10 +6,12 @@ def main():
     ws = WebSearch("https://finance.yahoo.com/gainers?count=100")
     symbols, changes = ws.web_parse()
     sorted_symbols = ws.map_symbols(symbols,changes)
-    
-    # stores the opening price upon application start time 
+
+    # stores the opening price upon application start time
+    # dynamically update the most recent closing price  
     start = [True] * 5 
     open_prices = []
+    recent_closes = []
 
     while True :
         for i in range(len(sorted_symbols)):
@@ -17,9 +19,15 @@ def main():
             if start[i] == True:
                 open_prices.append(ws.get_open_price(json_extract))
                 start[i] = False 
-            data = ws.cleanse_json(json_extract)
+            data, recent_close = ws.cleanse_json(json_extract)
+            recent_closes[i] = recent_close 
+            # create an image for the Flutter app to retreive
             ws.plot(data, './dart_folder/assets/image' + str(i+1), i)
-        # retrieves new data every 1 min 
+        
+        # create a json format data for the Flutter app to retrieve
+        ws.create_json(sorted_symbols,open_prices,recent_closes, './dart_folder/assets/data.json')
+
+        # retrieves new data and updates every 1 min 
         time.sleep(60)
     
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ class WebSearch():
     def web_parse(self):       
         symbol, changes = [], []
 
-        # retrieve website to parse (approx 1000 stock data)
+        # retrieve website to parse (approx 1000 different companies)
         for i in range(9):
             offset = 100 * i
             html = urllib.request.urlopen(self.website + "&offset=" + str(offset)).read()
@@ -32,7 +32,7 @@ class WebSearch():
         return symbol, changes
 
 
-    # find 'count' number of symbols with the highest changes 
+    # find 5 symbols with the highest changes 
     def map_symbols(self, symbol, changes):
         # create a hash map mapping symbol to changes
         symbol_to_change = {}
@@ -59,7 +59,8 @@ class WebSearch():
             return open_price
 
 
-    # cleanse the previous JSON data to build the image 
+    # cleanse the previous JSON data to build the image
+    # also retrieve the most recent closing price  
     def cleanse_json(self,json_data):
         new_records = []
         for k,v in json_data.items():
@@ -67,8 +68,8 @@ class WebSearch():
             new_records.append((k,close_price))
 
         # format will be in [(time1,price1),(time2,price2)]
-        return new_records
-    
+        return new_records, new_records[0][1]
+        
 
     # builds an image based on the cleansed data to specified path  
     def plot(self,records,path,type):
@@ -112,3 +113,8 @@ class WebSearch():
         plt.grid(True)
         plt.savefig(path)
         plt.close()
+
+
+    # writes a new json format : {'Stock 1' : {'symbol', 'open', 'close'}}
+    def create_json(self):
+

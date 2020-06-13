@@ -11,7 +11,7 @@ def main():
     # dynamically update the most recent closing price  
     start = [True] * 5 
     open_prices = []
-    recent_closes = []
+    recent_closes = [0] * 5
 
     while True :
         for i in range(len(sorted_symbols)):

@@ -49,6 +49,7 @@ class WebSearch():
     def api_call(self,symbol,apikey):
         ts = TimeSeries(key=apikey)
         data, meta_data = ts.get_intraday(symbol, interval = '1min', outputsize = 'full')
+        print(data)
         return data
 
 
@@ -120,7 +121,7 @@ class WebSearch():
     def create_json(self, symbols, open_data, closed_data, path):
         json_data = {}
         for i in range(len(symbols)):
-            json_data['Stock ' + str(i)] = {symbols[i],open_data[i],closed_data[i]}
+            json_data['Stock ' + str(i+1)] = [symbols[i],open_data[i],closed_data[i]]
         
         with open(path,'w') as output:
             json.dump(json_data,output)

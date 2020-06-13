@@ -1,10 +1,10 @@
 import urllib.request, urllib.parse, urllib.error
-import json 
 from bs4 import BeautifulSoup
 from alpha_vantage.timeseries import TimeSeries
 from matplotlib import pyplot as plt 
 from matplotlib import ticker as plticker
 import numpy as np 
+import json 
 
 class WebSearch():
 
@@ -120,8 +120,9 @@ class WebSearch():
     # writes a new json format : {'Stock 1' : {'symbol', 'open', 'close'}}
     def create_json(self, symbols, open_data, closed_data, path):
         json_data = {}
-        for i in range(len(symbols)):
-            json_data['Stock ' + str(i+1)] = [symbols[i],open_data[i],closed_data[i]]
+        json_data['name'] = [sym for sym in symbols]
+        json_data['open_price'] = [op for op in open_data]
+        json_data['closed_price'] = [cl for cl in closed_data]
         
         with open(path,'w') as output:
             json.dump(json_data,output)

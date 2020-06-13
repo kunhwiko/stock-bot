@@ -1,14 +1,14 @@
+import 'dart:convert';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 
 class Stock {
-  String time;
-  double price;
+  final List<String> data;
 
-  Stock(this.time, this.price);
+  Stock(this.data);
 
-  factory Stock.fromJson(dynamic json){
-    return Stock(json['time'] as String,json['close'] as double);
+  factory Stock.fromJson(Map<String, dynamic> json){
+    return Stock(data : parsedJson['data']);
   }
 }
 

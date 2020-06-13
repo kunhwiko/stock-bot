@@ -51,6 +51,14 @@ class WebSearch():
         return data
 
 
+    # get the open price upon app start time 
+    def get_open_price(self,json_data):
+        for k,v in json_data.items():
+            # extract just the first open price, the other data is irrelevant
+            open_price = v['1. open']
+            return open_price
+
+
     # cleanse the previous JSON data to build the image 
     def cleanse_json(self,json_data):
         new_records = []

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'parseJson.dart';
 import 'dart:convert';
 import 'dart:async' show Future;
-import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
 
 void main(){
@@ -46,7 +45,7 @@ class _HomeState extends State<Home> {
                             Expanded(
                               child : Container(
                                 padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
-                                child: Text('Stocks'),
+                                child: Text(snapshot.data[0].symbols),
                                 color : Colors.red[200],
                               ),
                             ),

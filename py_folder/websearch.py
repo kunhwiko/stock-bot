@@ -119,10 +119,13 @@ class WebSearch():
 
     # writes a new json format : {'Stock 1' : {'symbol', 'open', 'close'}}
     def create_json(self, symbols, open_data, closed_data, path):
-        json_data = {}
-        json_data['name'] = [sym for sym in symbols]
-        json_data['open_price'] = [op for op in open_data]
-        json_data['closed_price'] = [cl for cl in closed_data]
+        json_data = []
+        for i in range(len(symbols)):
+            records = {}
+            records['name'] = symbols[i]
+            records['open_price'] = open_data[i]
+            records['closed_price'] = closed_data[i]
+            json_data.append(records)
         
         with open(path,'w') as output:
             json.dump(json_data,output)

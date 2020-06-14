@@ -13,6 +13,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+
+    List<Stock> data = List<Stock>();
+
     return MaterialApp(
       home: DefaultTabController(
         length: 5,

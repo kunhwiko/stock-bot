@@ -17,18 +17,22 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    String jsonText = "";
-    List<Stock> data = List<Stock>();
+    List<String> symbols = [null, null, null, null, null];
+    List<String> open = [null, null, null, null, null];
+    List<String> close = [null, null, null, null, null];
 
-    Future _readJson() async {
+    parseJson() async{
       String text = await rootBundle.loadString('assets/data.json');
-      jsonText = text;
+      List<dynamic> decodedList = json.decode(text);
+      List<Stock> stockData = [null, null, null, null, null];
+
+      for (int i = 0; i < decodedList.length; i++) {
+        Stock stock = new Stock.fromJson(decodedList[i]);
+        stockData[i] = stock;
+      }
     }
 
-    Future parseJson() async{
-      final jsonResponse = json.decode(jsonText).cast<Map<String,dynamic>>();
-      data = jsonResponse.map<Stock>((json)=>Stock.fromJson(json)).toList();
-    }
+    parseJson();
 
     return MaterialApp(
       home: DefaultTabController(
@@ -44,7 +48,7 @@ class _HomeState extends State<Home> {
                       Expanded(
                         child : Container(
                           padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
-                          child: Text('Stock 1',),
+                          child: Text('Stock'),
                           color : Colors.red[200],
                         ),
                       ),

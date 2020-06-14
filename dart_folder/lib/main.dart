@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'parseJson.dart';
+import 'dart:convert';
+import 'dart:async' show Future;
+import 'package:flutter/services.dart' show rootBundle;
 
 void main(){
   return runApp(Home());
@@ -14,7 +17,18 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
+    String jsonText = "";
     List<Stock> data = List<Stock>();
+
+    Future _readJson() async {
+      String text = await rootBundle.loadString('assets/data.json');
+      jsonText = text;
+    }
+
+    Future parseJson() async{
+      final jsonResponse = json.decode(jsonText).cast<Map<String,dynamic>>();
+      data = jsonResponse.map<Stock>((json)=>Stock.fromJson(json)).toList();
+    }
 
     return MaterialApp(
       home: DefaultTabController(

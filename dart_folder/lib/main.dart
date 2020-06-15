@@ -44,8 +44,15 @@ class _HomeState extends State<Home> {
                           children : <Widget>[
                             Expanded(
                               child : Container(
-                                padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
-                                child: Text(snapshot.data[0].symbols),
+                                padding : EdgeInsets.fromLTRB(20.0, 43.0, 20.0, 22.0),
+                                child: Text(
+                                  snapshot.data[0].symbols,
+                                  style : TextStyle(
+                                    color : Colors.white,
+                                    fontWeight : FontWeight.bold,
+                                    fontSize : 18
+                                  )
+                                ),
                                 color : Colors.red[200],
                               ),
                             ),
@@ -71,7 +78,7 @@ class _HomeState extends State<Home> {
                           children : <Widget>[
                             Expanded(
                               child : Container(
-                                padding : EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 25.0),
+                                padding : EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 30.0),
                                 color : Colors.white,
                               ),
                             ),
@@ -82,7 +89,13 @@ class _HomeState extends State<Home> {
                             Expanded(
                               child : Container(
                                 padding : EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                                child: Text('    Profit  :  '),
+                                child: Text(
+                                  '    Profit  :  ',
+                                  style : TextStyle(
+                                    fontWeight : FontWeight.bold,
+
+                                  ),
+                                ),
                                 color : Colors.white,
                               ),
                             ),
@@ -102,7 +115,7 @@ class _HomeState extends State<Home> {
                           children : <Widget>[
                             Expanded(
                               child : Container(
-                                padding : EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 30.0),
+                                padding : EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 30.0),
                                 color : Colors.white,
                               ),
                             ),

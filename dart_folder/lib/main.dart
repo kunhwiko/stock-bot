@@ -87,10 +87,11 @@ class _HomeState extends State<Home> {
                         Row(
                           children : <Widget>[
                             Expanded(
+                              flex : 3,
                               child : Container(
                                 padding : EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                 child: Text(
-                                  '    Profit  :  ',
+                                  '    Profit  :  ' ,
                                   style : TextStyle(
                                     fontWeight : FontWeight.bold,
 
@@ -100,6 +101,7 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             Expanded(
+                              flex : 2,
                               child : Container(
                                 color : Colors.white,
                                 child: IconButton(

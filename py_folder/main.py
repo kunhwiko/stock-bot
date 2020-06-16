@@ -18,7 +18,7 @@ def main():
     while True :
         for i in range(len(sorted_symbols)):
             # input keycode from Alpha Vantage
-            json_extract = ws.api_call(sorted_symbols[i],'LO366YP95G58CFGT')
+            json_extract = ws.api_call(sorted_symbols[i],'input alphavantage keycode')
 
             if start[i] == True:
                 open_prices.append(ws.get_open_price(json_extract))

@@ -26,6 +26,14 @@ class _HomeState extends State<Home> {
     return data;
   }
 
+  _launchURL(String path) async{
+    if (await canLaunch(path)){
+      await launch(path);
+    }else{
+      throw 'Cannot launch url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -118,7 +126,7 @@ class _HomeState extends State<Home> {
                               child : Container(
                                 color : Colors.white,
                                 child: IconButton(
-                                  onPressed: () => launch("www.google.com"),
+                                  onPressed: () => _launchURL("https://finance.yahoo.com/quote/" + snapshot.data[0].symbols),
                                   icon : Icon(Icons.assessment),
                                   color : Colors.red[200],
                                 ),
@@ -146,8 +154,15 @@ class _HomeState extends State<Home> {
                             Expanded(
                               child : Container(
                                 padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
-                                child: Text('Stock 2'),
-                                color : Colors.orange[200],
+                                child: Text(
+                                    snapshot.data[1].symbols,
+                                    style : TextStyle(
+                                        color : Colors.white,
+                                        fontWeight : FontWeight.bold,
+                                        fontSize : 18
+                                    )
+                                ),
+                                color : Colors.amber[200],
                               ),
                             ),
                           ],
@@ -172,7 +187,58 @@ class _HomeState extends State<Home> {
                           children : <Widget>[
                             Expanded(
                               child : Container(
-                                padding : EdgeInsets.fromLTRB(20.0, 35.0, 20.0, 100.0),
+                                padding : EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 25.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              flex : 3,
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 16.0, 5.0, 15.0),
+                                child: Text(
+                                  '   Profit  : ',
+                                  style : TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                color : Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex : 4,
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 15.0),
+                                child: Text(
+                                  (double.parse(snapshot.data[1].closePrices) - double.parse(snapshot.data[1].openPrices)).toString().substring(0,7),
+                                  style : TextStyle(
+                                    color : double.parse(snapshot.data[1].closePrices) - double.parse(snapshot.data[1].openPrices) >= 0? Colors.green : Colors.red,
+                                  ),
+                                ),
+                                color : Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex : 3,
+                              child : Container(
+                                color : Colors.white,
+                                child: IconButton(
+                                  onPressed: () => _launchURL("https://finance.yahoo.com/quote/" + snapshot.data[1].symbols),
+                                  icon : Icon(Icons.assessment),
+                                  color : Colors.amber[200],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 30.0),
                                 color : Colors.white,
                               ),
                             ),
@@ -180,14 +246,305 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    new Container(
-                      color: Colors.lightGreen,
+                    new Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment : MainAxisAlignment.center,
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
+                                child: Text(
+                                    snapshot.data[2].symbols,
+                                    style : TextStyle(
+                                        color : Colors.white,
+                                        fontWeight : FontWeight.bold,
+                                        fontSize : 18
+                                    )
+                                ),
+                                color : Colors.lightGreen[200],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 10.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          child : Image(
+                            image : AssetImage('assets/image3.png'),
+                          ),
+                          color : Colors.white,
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 25.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              flex : 3,
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 16.0, 5.0, 15.0),
+                                child: Text(
+                                  '   Profit  : ',
+                                  style : TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                color : Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex : 4,
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 15.0),
+                                child: Text(
+                                  (double.parse(snapshot.data[2].closePrices) - double.parse(snapshot.data[2].openPrices)).toString().substring(0,7),
+                                  style : TextStyle(
+                                    color : double.parse(snapshot.data[2].closePrices) - double.parse(snapshot.data[2].openPrices) >= 0? Colors.green : Colors.red,
+                                  ),
+                                ),
+                                color : Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex : 3,
+                              child : Container(
+                                color : Colors.white,
+                                child: IconButton(
+                                  onPressed: () => _launchURL("https://finance.yahoo.com/quote/" + snapshot.data[2].symbols),
+                                  icon : Icon(Icons.assessment),
+                                  color : Colors.lightGreen[200],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 30.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    new Container(
-                      color: Colors.lightBlue[300],
+                    new Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment : MainAxisAlignment.center,
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
+                                child: Text(
+                                    snapshot.data[3].symbols,
+                                    style : TextStyle(
+                                        color : Colors.white,
+                                        fontWeight : FontWeight.bold,
+                                        fontSize : 18
+                                    )
+                                ),
+                                color : Colors.lightBlue[200],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 10.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          child : Image(
+                            image : AssetImage('assets/image4.png'),
+                          ),
+                          color : Colors.white,
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 25.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              flex : 3,
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 16.0, 5.0, 15.0),
+                                child: Text(
+                                  '   Profit  : ',
+                                  style : TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                color : Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex : 4,
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 15.0),
+                                child: Text(
+                                  (double.parse(snapshot.data[3].closePrices) - double.parse(snapshot.data[3].openPrices)).toString().substring(0,7),
+                                  style : TextStyle(
+                                    color : double.parse(snapshot.data[3].closePrices) - double.parse(snapshot.data[3].openPrices) >= 0? Colors.green : Colors.red,
+                                  ),
+                                ),
+                                color : Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex : 3,
+                              child : Container(
+                                color : Colors.white,
+                                child: IconButton(
+                                  onPressed: () => _launchURL("https://finance.yahoo.com/quote/" + snapshot.data[3].symbols),
+                                  icon : Icon(Icons.assessment),
+                                  color : Colors.lightBlue[200],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 30.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    new Container(
-                      color: Colors.deepPurple[100],
+                    new Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment : MainAxisAlignment.center,
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
+                                child: Text(
+                                    snapshot.data[4].symbols,
+                                    style : TextStyle(
+                                        color : Colors.white,
+                                        fontWeight : FontWeight.bold,
+                                        fontSize : 18
+                                    )
+                                ),
+                                color : Colors.deepPurple[200],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 10.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          child : Image(
+                            image : AssetImage('assets/image5.png'),
+                          ),
+                          color : Colors.white,
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 25.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              flex : 3,
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 16.0, 5.0, 15.0),
+                                child: Text(
+                                  '   Profit  : ',
+                                  style : TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                color : Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex : 4,
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 15.0),
+                                child: Text(
+                                  (double.parse(snapshot.data[4].closePrices) - double.parse(snapshot.data[4].openPrices)).toString().substring(0,7),
+                                  style : TextStyle(
+                                    color : double.parse(snapshot.data[4].closePrices) - double.parse(snapshot.data[4].openPrices) >= 0? Colors.green : Colors.red,
+                                  ),
+                                ),
+                                color : Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex : 3,
+                              child : Container(
+                                color : Colors.white,
+                                child: IconButton(
+                                  onPressed: () => _launchURL("https://finance.yahoo.com/quote/" + snapshot.data[4].symbols),
+                                  icon : Icon(Icons.assessment),
+                                  color : Colors.deepPurple[200],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children : <Widget>[
+                            Expanded(
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 30.0),
+                                color : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'parseJson.dart';
+import 'stock.dart';
 import 'dart:convert';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;

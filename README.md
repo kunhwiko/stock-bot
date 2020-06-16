@@ -36,5 +36,7 @@ Welcome to the Stock Bot, which presents the following features :
    6) Turn on iOS or Android simulator
    7) On terminal, change directory to dart_folder and run 'flutter run'
 
+-----
+### Images
 
-  
+![](images/App.png)

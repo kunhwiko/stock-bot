@@ -1,4 +1,4 @@
-from py_folder.websearch import WebSearch
+from websearch import WebSearch
 import time 
 import json
 
@@ -27,10 +27,10 @@ def main():
             recent_closes[i] = recent_close 
 
             # create an image for the Flutter app to retreive
-            ws.plot(data, './dart_folder/assets/image' + str(i+1), i)
+            ws.plot(data, '../dart_folder/assets/image' + str(i+1), i)
         
         # create a json format data for the Flutter app to retrieve
-        ws.create_json(sorted_symbols,open_prices,recent_closes, './dart_folder/assets/data.json')
+        ws.create_json(sorted_symbols,open_prices,recent_closes, '../dart_folder/assets/data.json')
 
         # retrieves new data and updates every 1 min 
         time.sleep(60)

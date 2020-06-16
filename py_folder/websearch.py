@@ -49,7 +49,6 @@ class WebSearch():
     def api_call(self,symbol,apikey):
         ts = TimeSeries(key=apikey)
         data, meta_data = ts.get_intraday(symbol, interval = '1min', outputsize = 'full')
-        print(data)
         return data
 
 

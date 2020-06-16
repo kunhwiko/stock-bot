@@ -21,7 +21,7 @@ Welcome to the Stock Bot, which presents the following features :
   	   * Button that links to Yahoo Finance info on the specified stock 
       
 -----
-### How to Compile/Run
+### Compile/Run
 
    1) Download folder and move directory to downloaded path 
    2) Check the following on main.py 

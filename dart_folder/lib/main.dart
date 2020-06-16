@@ -3,6 +3,7 @@ import 'parseJson.dart';
 import 'dart:convert';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:url_launcher/url_launcher.dart';
 
 void main(){
   return runApp(Home());
@@ -117,7 +118,7 @@ class _HomeState extends State<Home> {
                               child : Container(
                                 color : Colors.white,
                                 child: IconButton(
-                                  onPressed: () => launch("https://"),
+                                  onPressed: () => launch("www.google.com"),
                                   icon : Icon(Icons.assessment),
                                   color : Colors.red[200],
                                 ),

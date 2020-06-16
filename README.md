@@ -40,4 +40,3 @@ Welcome to the Stock Bot, which presents the following features :
 ### Images
 
 ![](Images/App.png)
-![](Images/Yahoo.png)

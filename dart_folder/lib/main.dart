@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
                           children : <Widget>[
                             Expanded(
                               child : Container(
-                                padding : EdgeInsets.fromLTRB(20.0, 43.0, 20.0, 22.0),
+                                padding : EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 25.0),
                                 child: Text(
                                   snapshot.data[0].symbols,
                                   style : TextStyle(
@@ -78,7 +78,7 @@ class _HomeState extends State<Home> {
                           children : <Widget>[
                             Expanded(
                               child : Container(
-                                padding : EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 30.0),
+                                padding : EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 25.0),
                                 color : Colors.white,
                               ),
                             ),
@@ -89,23 +89,35 @@ class _HomeState extends State<Home> {
                             Expanded(
                               flex : 3,
                               child : Container(
-                                padding : EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                padding : EdgeInsets.fromLTRB(20.0, 16.0, 5.0, 15.0),
                                 child: Text(
-                                  '    Profit  :  ' ,
+                                  '   Profit  : ',
                                   style : TextStyle(
-                                    fontWeight : FontWeight.bold,
-
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 color : Colors.white,
                               ),
                             ),
                             Expanded(
-                              flex : 2,
+                              flex : 4,
+                              child : Container(
+                                padding : EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 15.0),
+                                child: Text(
+                                  (double.parse(snapshot.data[0].closePrices) - double.parse(snapshot.data[0].openPrices)).toString().substring(0,7),
+                                  style : TextStyle(
+                                    color : double.parse(snapshot.data[0].closePrices) - double.parse(snapshot.data[0].openPrices) >= 0? Colors.green : Colors.red,
+                                  ),
+                                ),
+                                color : Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex : 3,
                               child : Container(
                                 color : Colors.white,
                                 child: IconButton(
-                                  onPressed: (){},
+                                  onPressed: () => launch("https://"),
                                   icon : Icon(Icons.assessment),
                                   color : Colors.red[200],
                                 ),
@@ -117,7 +129,7 @@ class _HomeState extends State<Home> {
                           children : <Widget>[
                             Expanded(
                               child : Container(
-                                padding : EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 30.0),
+                                padding : EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 30.0),
                                 color : Colors.white,
                               ),
                             ),

@@ -35,7 +35,8 @@ Welcome to the Stock Bot, which presents the following features :
    5) Wait for images, JSON file to be generated
    6) Turn on iOS or Android simulator
    7) On terminal, change directory to dart_folder and run 'flutter run'
-
+   8) Run 'flutter clean' and delete pycache file after finishing app
+   
 -----
 ### Images
 

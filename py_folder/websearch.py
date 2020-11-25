@@ -32,20 +32,18 @@ class WebSearch():
                     change_tmp = float(ch.text)
                 symbol[symbol_tmp] = change_tmp 
         
-        print(symbol)
         return symbol
 
 
     # find 5 symbols with the highest changes 
-    def map_symbols(self, symbol, changes):
-        # create a hash map mapping symbol to changes
-        symbol_to_change = {}
-        for i in range(len(symbol)):
-            symbol_to_change[symbol[i]] = changes[i]
-
-        # sort symbols by highest changes  
-        sorted_syms = [sym for sym in sorted(symbol_to_change.keys(),key=symbol_to_change.get,reverse=True)]
-        return sorted_syms[:5]
+    def map_symbols(self, symbol):
+        # sort symbols by highest changes 
+        sorted_syms = []
+        for sym in symbol.keys():
+            heapq.heappush(sorted_syms, (symbol[sym], sym))
+            if len(sorted_syms) > 5:
+                heapq.heappop(sorted_syms)
+        return [sym for ch, sym in sorted_syms][::-1]
 
 
     # call the API of a certain stock, and return a JSON file 

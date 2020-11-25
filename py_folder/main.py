@@ -6,8 +6,8 @@ def main():
     # 'finance.yahoo.com/gainers' for most gaining stocks
     # 'finance.yahoo.com/most-active' for most active stocks
     ws = WebSearch("https://finance.yahoo.com/gainers?count=100")
-    symbols, changes = ws.web_parse()
-    sorted_symbols = ws.map_symbols(symbols,changes)
+    symbols = ws.web_parse()
+    sorted_symbols = ws.map_symbols(symbols)
 
     # stores the opening price upon application start time
     # dynamically update the most recent closing price  

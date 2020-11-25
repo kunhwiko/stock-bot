@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 from matplotlib import ticker as plticker
 import numpy as np 
 import json 
+import heapq 
 
 class WebSearch():
 
@@ -15,22 +16,24 @@ class WebSearch():
 
     # parse website to search 5 stocks 
     def web_parse(self):       
-        symbol, changes = [], []
+        symbol = {}
 
         # retrieve website to parse (approx 1000 different companies)
         for i in range(9):
             offset = 100 * i
             html = urllib.request.urlopen(self.website + "&offset=" + str(offset)).read()
-            soup = BeautifulSoup(html,"html.parser")
+            soup = BeautifulSoup(html, "html.parser")
 
             # retrieve company symbols and their daily change in stock
             for stock in soup.find_all('tr',attrs = {'class':'simpTblRow'}):
                 for sym in stock.find_all('td',attrs = {'aria-label':'Symbol'}):
-                    symbol.append(sym.text)
+                    symbol_tmp = sym.text 
                 for ch in stock.find_all('td',attrs = {'aria-label':'Change'}):
-                    changes.append(float(ch.text))
+                    change_tmp = float(ch.text)
+                symbol[symbol_tmp] = change_tmp 
         
-        return symbol, changes
+        print(symbol)
+        return symbol
 
 
     # find 5 symbols with the highest changes 
@@ -46,14 +49,14 @@ class WebSearch():
 
 
     # call the API of a certain stock, and return a JSON file 
-    def api_call(self,symbol,apikey):
-        ts = TimeSeries(key=apikey)
+    def api_call(self, symbol, apikey):
+        ts = TimeSeries(key = apikey)
         data, meta_data = ts.get_intraday(symbol, interval = '1min', outputsize = 'full')
         return data
 
 
     # get the open price upon app start time 
-    def get_open_price(self,json_data):
+    def get_open_price(self, json_data):
         for k,v in json_data.items():
             # extract just the first open price, the other data is irrelevant
             open_price = v['1. open']
@@ -62,18 +65,18 @@ class WebSearch():
 
     # cleanse the previous JSON data to build the image
     # also retrieve the most recent closing price  
-    def cleanse_json(self,json_data):
+    def cleanse_json(self, json_data):
         new_records = []
         for k,v in json_data.items():
             close_price = v['4. close']
-            new_records.append((k,close_price))
+            new_records.append((k, close_price))
 
         # format will be in [(time1,price1),(time2,price2)]
         return new_records, new_records[0][1]
         
 
     # builds an image based on the cleansed data to specified path  
-    def plot(self,records,path,type):
+    def plot(self, records, path, type):
         x_axis = []
         y_axis = []
 
@@ -93,23 +96,23 @@ class WebSearch():
 
         # plot 
         fig, ax = plt.subplots(figsize=(16,16))
-        plt.plot(x_axis,y_axis,color=color[type],linewidth=1.5,linestyle="solid")
-        plt.fill_between(x_axis,y_axis,color=background[type])
+        plt.plot(x_axis, y_axis, color=color[type], linewidth=1.5, linestyle="solid")
+        plt.fill_between(x_axis, y_axis, color=background[type])
 
         # configure x axis 
-        ax.set_xlabel('Time',fontsize=35,fontweight="bold")
+        ax.set_xlabel('Time', fontsize=35, fontweight="bold")
         plt.xticks(rotation=20)
         loc = plticker.MultipleLocator(base=len(x_axis)//5)
         ax.xaxis.set_major_locator(loc)
-        x_ticks = np.append(ax.get_xticks(),len(x_axis)-1)
+        x_ticks = np.append(ax.get_xticks(), len(x_axis)-1)
         ax.set_xticks(x_ticks)
-        ax.tick_params(axis="x",labelsize=25)
-        plt.xlim(x_axis[0],x_axis[-1])
+        ax.tick_params(axis="x", labelsize=25)
+        plt.xlim(x_axis[0], x_axis[-1])
 
         # configure y axis 
         ax.set_ylabel('Price ($)', fontsize=35, fontweight="bold")
-        ax.tick_params(axis="y",labelsize=25)
-        plt.ylim(min(y_axis)-3,max(y_axis)+3)
+        ax.tick_params(axis="y", labelsize=25)
+        plt.ylim(min(y_axis)-3, max(y_axis)+3)
 
         plt.grid(True)
         plt.savefig(path)
@@ -127,5 +130,5 @@ class WebSearch():
             json_data.append(records)
         
         with open(path,'w') as output:
-            json.dump(json_data,output)
+            json.dump(json_data, output)
 
